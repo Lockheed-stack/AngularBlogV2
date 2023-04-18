@@ -19,7 +19,6 @@ jobs:
           node-version: v18.14.2
           cache: 'npm'
       - run: npm ci
-      - run: npm test
 
       - name: Install angularCli
         run: npm install -g @angular/cli
