@@ -1,0 +1,38 @@
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+    <input type="text" nz-input placeholder="搜索分类" />
+  </nz-input-group>
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="onbtnSearchClicked()"><span nz-icon nzType="search"></span></button>
+</ng-template>
+
+
+<nz-table 
+    [nzScroll]="{ y: '400px' }"
+    nzShowSizeChanger
+    [nzLoadingDelay]="1.5"
+    [nzData]="listOfCatalog"
+    [nzFrontPagination]="false"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex"
+    (nzQueryParams)="onQueryParamsChange($event)">
+    <thead>
+      <tr>
+        <th [nzWidth]="'60px'">ID</th>
+        <th>分类名</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of listOfCatalog">
+        <td>{{data.id}}</td>
+        <td>{{data.catalogName}}</td>
+        <td>
+            <span><button nz-button nzType="primary" (click)="onbtnEditClicked(data.id,data.catalogName)">编辑</button></span>
+            <nz-divider nzType="vertical"></nz-divider>
+            <span><button nz-button nzType="primary" nzDanger (click)="onbtnDeleteClicked(data.id)">删除</button></span>
+        </td>
+      </tr>
+    </tbody>
+</nz-table>

@@ -1,0 +1,26 @@
+<button mat-fab color="accent" nz-popover nzPopoverTrigger="click" nzPopoverTitle="目录" [nzPopoverContent]="bookmark"
+    [nzPopoverBackdrop]="true"
+    [nzPopoverVisible]="popoverVisible"
+    (click)="isShow()"
+    nzPopoverOverlayClassName="bookmarkPopover">
+    <mat-icon>bookmark</mat-icon>
+</button>
+
+<ng-template #bookmark>
+
+    <nz-skeleton [nzActive]="contentLoading" [nzLoading]="contentLoading">
+    </nz-skeleton>
+    <mat-selection-list [multiple]="false" *ngIf="!contentLoading">
+        <ng-container *ngFor="let val of inputArray">
+            <mat-list-option (click)="onScroll(val['TitleId'])">
+                {{val['TitleName']}}
+            </mat-list-option>
+            <mat-list *ngIf="val['subTitles'].length>0" style="margin-left:30px;">
+                <div *ngFor="let sub of val['subTitles']">
+                    <mat-list-option (click)="onScroll(sub['subTitleId'])">{{sub['subTitleName']}}</mat-list-option>
+                </div>
+            </mat-list>
+        </ng-container>
+    </mat-selection-list>
+
+</ng-template>

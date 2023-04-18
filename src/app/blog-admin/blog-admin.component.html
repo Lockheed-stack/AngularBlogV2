@@ -1,0 +1,58 @@
+<nz-layout class="layout">
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+        <img class="logo" src="../../assets/imgs/logo.png" alt="">
+
+        <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [nzTooltipTitle]="isCollapsed ? '仪表盘' : ''">
+                <span nz-icon nzType="dashboard" nzTheme="outline"></span>
+                <span><a routerLink="dashboard">仪表盘</a></span>
+            </li>
+            <li nz-submenu nzTitle="文章管理" nzIcon="file-text">
+                <ul>
+                    <li nz-menu-item>
+                        <span nz-icon nzType="edit" nzTheme="outline"></span>
+                        <span><a routerLink="addArticle">写/修改文章</a></span>
+                    </li>
+                    <li nz-menu-item>
+                        <span nz-icon nzType="read" nzTheme="outline"></span>
+                        <span><a routerLink="articleList">文章列表</a>
+                        </span>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="分类管理" nzIcon="file-search">
+                <ul>
+                    <li nz-menu-item>
+                        <span nz-icon nzType="edit" nzTheme="outline"></span>
+                        <span><a routerLink="addCatalog">新增/修改分类</a></span>
+                    </li>
+                    <li nz-menu-item>
+                        <span nz-icon nzType="align-left" nzTheme="outline"></span>
+                        <span><a routerLink="categories">文章分类</a></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </nz-sider>
+
+    <nz-layout>
+
+        <nz-header>
+            <div nz-space nzAlign="baseline" class="space-align">
+                <span *nzSpaceItem class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+                    (click)="isCollapsed = !isCollapsed"></span>
+                <h2 *nzSpaceItem>博客管理</h2>
+                <button class="logout" nz-button nzType="primary" nzDanger *nzSpaceItem
+                    (click)="onLogoutClick()">退出登录</button>
+            </div>
+        </nz-header>
+
+        <nz-content>
+            <router-outlet></router-outlet>
+        </nz-content>
+
+        <nz-footer>Power by Angular & Go</nz-footer>
+
+    </nz-layout>
+</nz-layout>

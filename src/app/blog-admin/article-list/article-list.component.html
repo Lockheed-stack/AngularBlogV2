@@ -1,0 +1,63 @@
+<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+    <input type="text" nz-input placeholder="搜索文章" />
+  </nz-input-group>
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="onbtnSearchClicked()"><span nz-icon nzType="search"></span></button>
+</ng-template>
+
+<nz-table 
+    [nzScroll]="{ y: '400px' }"
+    nzShowSizeChanger
+    [nzLoadingDelay]="1.5"
+    [nzData]="listOfArticle"
+    [nzFrontPagination]="false"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex"
+    (nzQueryParams)="onQueryParamsChange($event)">
+    <thead>
+      <tr>
+        <th [nzWidth]="'60px'">ID</th>
+        <th>文章标题</th>
+        <th [nzWidth]="'110px'">文章分类ID</th>
+        <th>类别</th>
+        <th>缩略图</th>
+        <th>文章描述</th>
+        <!-- <th>文章内容</th> -->
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of listOfArticle">
+        <td>{{data.id}}</td>
+        <td>{{data.title}}</td>
+        <td>{{data.cid}}</td>
+        <td>{{data.catalogName}}</td>
+        <td>
+          <img nz-image width="100px" height="100px" [nzSrc]="data.imgurl" [nzFallback]="fallback" alt="" />
+        </td>
+        <td>{{data.desc}}</td>
+        <!-- <td>{{data.content}}</td> -->
+        <td>
+            <span><button nz-button nzType="primary" (click)="onbtnEditClicked(data.id,data.title,data.catalogName,data.imgurl,data.desc)">编辑</button></span>
+            <nz-divider nzType="vertical"></nz-divider>
+            <span><button nz-button nzType="primary" nzDanger (click)="onbtnDeleteClicked(data.id)">删除</button></span>
+        </td>
+      </tr>
+    </tbody>
+</nz-table>
+
+<!-- modal template -->
+<!-- <ng-template #tplTitle>
+  <span>Title Template</span>
+</ng-template>
+<ng-template #tplContent let-params>
+  <p>{{ params.value }}</p>
+</ng-template>
+<ng-template #tplFooter let-ref="modalRef">
+  <button nz-button (click)="ref.destroy()">取消</button>
+  <button nz-button nzType="primary" (click)="destroyTplModal(ref)" [nzLoading]="tplModalButtonLoading">
+    确定
+  </button>
+</ng-template> -->

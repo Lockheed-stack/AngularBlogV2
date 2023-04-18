@@ -1,0 +1,81 @@
+<div class="bg-container">
+
+  <div class="box-form">
+    <div class="left">
+      <div class="overlay">
+        <h1>Hello World.</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Curabitur et est sed felis aliquet sollicitudin</p>
+        <span>
+          <p>Other Choice</p>
+
+          <button mat-icon-button>
+            <mat-icon><ng-icon name="bootstrapGithub"></ng-icon>></mat-icon>
+          </button>
+
+          <button mat-icon-button>
+            <mat-icon><ng-icon name="bootstrapWechat"></ng-icon>></mat-icon>
+          </button>
+
+          <button mat-icon-button routerLink="/">
+            <mat-icon><ng-icon name="bootstrapHouse"></ng-icon>></mat-icon>
+          </button>
+        </span>
+      </div>
+    </div>
+
+
+    <div class="right">
+      <h5>SignIn</h5>
+      <!-- <p>Don't have an account? <a href="#">Creat Your Account</a> it takes less than a minute</p> -->
+
+      <!-- <div class="inputs">
+          <i nz-icon nzType="user" nzTheme="outline"></i>
+          <input type="text" placeholder="user name">
+          <br>
+          <input type="password" placeholder="password">
+        </div> -->
+
+
+      <form class="inputs" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="username" formControlName="username">
+
+          <mat-error *ngIf="signinForm.get('username').invalid&& signinForm.get('username').errors['required']">
+            username required!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="inputs">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="password" formControlName="password" [type]="hidePassword?'password':'text'">
+
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword" type="button">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="signinForm.get('password').invalid&& signinForm.get('password').errors['required']">
+            password required!</mat-error>
+        </mat-form-field>
+
+        <div class="remember-me--forget-password">
+          <mat-checkbox><span class="text-checkbox">Remember me</span></mat-checkbox>
+        </div>
+        <br><br>
+
+        <nz-alert *ngIf="signInSuccess === false && btnSubmitClicked" nzBanner nzType="error" [nzMessage]="loginErrMsg"
+          nzCloseable (nzOnClose)="onWarningBannerClose()"></nz-alert>
+
+        <nz-alert nzType="success" nzMessage="登录成功,正在跳转" nzShowIcon
+          *ngIf="signInSuccess === true && btnSubmitClicked"></nz-alert>
+
+        <mat-progress-spinner [mode]="'indeterminate'" [diameter]="80" *ngIf="showProgressSpin">
+        </mat-progress-spinner>
+        <br><br>
+        <button class="btn-login" mat-raised-button color="primary" type="submit" [disabled]="btnSubmitDisabled">Login</button>
+      </form>
+
+    </div>
+  </div>
+</div>

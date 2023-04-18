@@ -1,0 +1,31 @@
+<div class="add-article-container">
+    <h2 *ngIf="catalogId===0;else caseEdit">新增分类</h2>
+    <ng-template #caseEdit>
+        <h2>编辑分类: {{name}}</h2>
+    </ng-template>
+
+    <form nz-form [nzNoColon]="true" (ngSubmit)="onCatalogSubmit()" [formGroup]="catalogFormGroup">
+        
+        <nz-form-item>
+            <nz-form-label nzRequired>分类标题</nz-form-label>
+            <nz-form-control [nzErrorTip]="errTips">
+                <input *ngIf="catalogId===0;else caseInput" 
+                type="text" nz-input placeholder="标题" 
+                formControlName="name"
+                >
+                <ng-template #caseInput>
+                    <input type="text" nz-input [placeholder]="name" 
+                    formControlName="name">
+                </ng-template>
+            </nz-form-control>
+
+        </nz-form-item>
+
+        <nz-form-item>
+            <button nz-button nzType="primary" type="submit">提交</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzType="default" type="button">取消</button>
+        </nz-form-item>
+
+    </form>
+</div>

@@ -1,0 +1,16 @@
+mat-card{
+    width: fit-content;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+nz-input-group{
+    width: 40%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 30%;
+}
+nz-pagination{
+    margin-top: 0;
+    margin-right: 0;
+}

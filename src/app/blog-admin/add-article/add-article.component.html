@@ -1,0 +1,64 @@
+<div class="add-article-container">
+    <h2 >{{articleTitle}}</h2>
+
+    <form nz-form [nzNoColon]="true" (ngSubmit)="onArticleSubmit()" [formGroup]="articleFormGroup">
+        <nz-form-item>
+            <nz-form-label nzRequired>文章标题</nz-form-label>
+            <nz-form-control nzErrorTip="标题不能为空">
+                <input type="text" nz-input placeholder="标题" formControlName="title">
+            </nz-form-control>
+
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzRequired>文章分类</nz-form-label>
+            <nz-form-control nzErrorTip="文章分类不能为空">
+                <nz-select [nzPlaceHolder]="catalogName" [nzLoading]="loading"
+                    (nzOpenChange)="onCategorySelectClicked()" formControlName="cid">
+                    <nz-option *ngFor="let val of catalogList" [nzValue]="val.id"
+                        [nzLabel]="val.catalogName"></nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item>
+            <nz-form-label nzRequired>文章描述</nz-form-label>
+            <nz-form-control nzErrorTip="描述不能为空">
+                <textarea nz-input placeholder="文章描述" nzAutosize formControlName="desc"></textarea>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label>缩略图</nz-form-label>
+            <nz-form-control>
+                <nz-space [nzSize]="'large'" [nzAlign]="'start'">
+                    <nz-upload nzListType="picture-card" [nzFileList]="uploadList" [nzCustomRequest]="customUpload"
+                        (nzChange)="handleUploadChange($event)">
+                        <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                        <div class="ant-upload-text">Upload</div>
+                    </nz-upload>
+                    <span>旧缩略图</span>
+                    <span><img nz-image width="100px" height="100px" [nzSrc]="oldAvatarUrl"
+                            [nzFallback]="fallback"></span>
+                </nz-space>
+
+
+            </nz-form-control>
+
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label>文章内容</nz-form-label>
+            <nz-form-control>
+                <textarea nz-input placeholder="文章内容" nzAutosize formControlName="content"></textarea>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <button nz-button nzType="primary" type="submit">提交</button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzType="default" type="button">取消</button>
+        </nz-form-item>
+
+    </form>
+</div>

@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+    overflow-y: auto;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.ant-popover {
+    top: 10%;
+}
+
+.bookmarkPopover .ant-popover-inner-content {
+    overflow: auto;
+    height: 80vh;
+    max-width: 30vw;
+    background: #683ab75e;
+}
+/* .popover .ant-popover-inner-content{
+
+} */

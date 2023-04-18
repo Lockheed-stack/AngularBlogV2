@@ -1,0 +1,62 @@
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+.logo {
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+}
+
+nz-header {
+    background: #efc67dc9;
+    padding: 0;
+}
+nz-header h2{
+    display: block;
+    overflow: hidden;
+}
+nz-content {
+    margin: 0 16px;
+    padding: 0 40px;
+    /* overflow-y: scroll; */
+}
+
+nz-layout {
+    min-height: 100vh;
+    max-height: 100%;
+}
+
+nz-footer {
+    text-align: center;
+    /* max-height: fit-content; */
+}
+
+div.space-align{
+    /* min-width: 100%; */
+    flex: 1 1 auto;
+}
+
+
+ul.nzMenu{
+    background: #efc67dc9;
+    color:#ed136e;
+    font-size: medium;
+}
+button.logout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: black;
+}

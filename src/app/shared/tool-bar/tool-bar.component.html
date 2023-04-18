@@ -1,0 +1,42 @@
+<mat-toolbar color="primary">
+    <button (click)="onToggleClicked()" mat-icon-button class="example-icon"
+        aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>
+        <a href="">
+            <img src="../../../assets/imgs/logo3-removebg-preview.png" width="60%">
+        </a>
+    </span>
+    <span class="example-spacer"></span>
+
+    <a href="https://github.com/Lockheed-stack?tab=repositories">
+        <button mat-icon-button>
+            <mat-icon><ng-icon name="bootstrapGithub"></ng-icon>></mat-icon>
+        </button>
+    </a>
+    <a href="">
+        <button mat-icon-button>
+            <mat-icon><ng-icon name="bootstrapWechat"></ng-icon>></mat-icon>
+        </button>
+    </a>
+    <a>
+        <button mat-icon-button
+        nz-popover nzPopoverTrigger="click" nzPopoverTitle="分享链接"
+        [nzPopoverContent]="QRcodeTmp"
+        nzPopoverOverlayClassName="popover"
+        >
+            <mat-icon>share</mat-icon>
+        </button>
+    </a>
+    <a href="/login">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+            <mat-icon><ng-icon name="bootstrapTools"></ng-icon>></mat-icon>
+        </button>
+    </a>
+
+</mat-toolbar>
+
+<ng-template #QRcodeTmp>
+    <nz-qrcode nzValue="https://leelennin.top"></nz-qrcode>
+</ng-template>
