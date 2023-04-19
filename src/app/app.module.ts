@@ -63,6 +63,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // markdown
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
@@ -152,6 +153,7 @@ registerLocaleData(zh);
     MatExpansionModule,
     MatTreeModule,
     MatGridListModule,
+    MatTooltipModule,
 
     MarkdownModule.forRoot({
       loader: HttpClient,
