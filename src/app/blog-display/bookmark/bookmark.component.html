@@ -12,7 +12,7 @@
     </nz-skeleton>
     <mat-selection-list [multiple]="false" *ngIf="!contentLoading">
         <ng-container *ngFor="let val of inputArray">
-            <mat-list-option (click)="onScroll(val['TitleId'])" matTooltip="{{val['TitleName']}}">
+            <mat-list-option (click)="onScroll(val['TitleId'])" [matTooltip]="val['TitleName']">
                 {{val['TitleName']}}
             </mat-list-option>
             <mat-list *ngIf="val['subTitles'].length>0" style="margin-left:30px;">
