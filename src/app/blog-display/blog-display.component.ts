@@ -6,6 +6,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
 import { CategoriesService } from '../services/categories.service';
 import { Observable } from 'rxjs';
+import hljs from 'highlight.js/lib/common';
 
 
 
@@ -75,14 +76,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
     const element = document.getElementById(titleId);
     element.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'start' });
   }
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.isReady = true;
-    }, 1000);
-    setTimeout(() => {
-      this.onContentLoading = false;
-    }, 3000);
-  }
+
   renderHeading() {
     this.markdownService.renderer.heading = (text: string, level: number) => {
       this.titleNum++;
@@ -126,6 +120,21 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
   // -------------------- markdown process --------------------------
 
 
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.isReady = true;
+      document.querySelectorAll('pre').forEach((el: HTMLElement) => {
+        el.style.background = '#033456';
+        hljs.highlightElement(el.firstElementChild as HTMLElement);
+      })
+    }, 1000);
+
+    setTimeout(() => {
+      this.onContentLoading = false;
+    }, 3000);
+
+  }
 
   ngOnInit(): void {
 
@@ -180,7 +189,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
         )
       }
     })
-    
+
   }
 
 }

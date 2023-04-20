@@ -24,12 +24,20 @@
                 ngPreserveWhitespaces
                 [disableSanitizer]="true" [data]="markdownData">
             </div>
-            <!-- <markdown katex [src]="srcPath"></markdown> -->
+            <!-- <markdown katex src="../../assets/test.md"></markdown>
+            <pre>
+                <code class="language-cpp">int a=10;</code>
+            </pre>
+            <pre>
+                <code class="language-shell">$ cat test.txt</code>
+            </pre>
+            <pre>
+                <code class="language-yaml">start: qwe</code>
+            </pre> -->
         </section>
 
         <div class="anchor" *ngIf="isReady">
             <app-bookmark [inputArray]="titleArray" [contentLoading]="onContentLoading"></app-bookmark>
         </div>
-
     </mat-sidenav-content>
 </mat-sidenav-container>

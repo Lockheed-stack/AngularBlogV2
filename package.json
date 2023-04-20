@@ -24,6 +24,7 @@
     "@ng-icons/bootstrap-icons": "^23.3.0",
     "@ng-icons/core": "^23.3.0",
     "github-markdown-css": "^5.2.0",
+    "highlight.js": "^11.7.0",
     "katex": "^0.16.4",
     "marked": "^4.3.0",
     "ng-zorro-antd": "^15.1.0",

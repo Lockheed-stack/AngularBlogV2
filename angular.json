@@ -34,7 +34,8 @@
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css",
               "node_modules/katex/dist/katex.min.css",
-              "node_modules/github-markdown-css/github-markdown-light.css"
+              "node_modules/github-markdown-css/github-markdown-light.css",
+              "node_modules/highlight.js/styles/agate.css"
             ],
             "scripts": [
               "node_modules/marked/marked.min.js",
