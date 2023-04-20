@@ -32,6 +32,9 @@
     margin: 0 auto;
     padding: 45px;
 }
+.markdown-body pre{
+    background-color: #000000;
+}
 @media (max-width: 767px) {
     .markdown-body {
         padding: 15px;
