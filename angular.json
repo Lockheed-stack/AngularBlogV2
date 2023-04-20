@@ -33,13 +33,11 @@
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css",
-              "node_modules/prismjs/themes/prism-okaidia.css",
               "node_modules/katex/dist/katex.min.css",
               "node_modules/github-markdown-css/github-markdown-light.css"
             ],
             "scripts": [
               "node_modules/marked/marked.min.js",
-              "node_modules/prismjs/prism.js",
               "node_modules/katex/dist/katex.min.js",
               "node_modules/katex/dist/contrib/auto-render.min.js"
             ]

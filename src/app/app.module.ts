@@ -76,7 +76,6 @@ import { FootComponent } from './shared/foot/foot.component';
 import { BookmarkComponent } from './blog-display/bookmark/bookmark.component';
 
 
-
 registerLocaleData(zh);
 
 @NgModule({
@@ -169,6 +168,7 @@ registerLocaleData(zh);
         },
       },
     }),
+
   ],
   providers: [
     { provide: NZ_I18N, useValue: zh_CN },

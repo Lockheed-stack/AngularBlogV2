@@ -17,19 +17,18 @@
         </div>
         <section class="markdown-body">
 
+            <nz-skeleton [nzActive]="onContentLoading" [nzLoading]="onContentLoading">
+            </nz-skeleton>
             <div markdown (ready)="onReady()" 
                 katex
                 ngPreserveWhitespaces
                 [disableSanitizer]="true" [data]="markdownData">
-                <nz-skeleton [nzActive]="onContentLoading" [nzLoading]="onContentLoading">
-                </nz-skeleton>
             </div>
             <!-- <markdown katex [src]="srcPath"></markdown> -->
         </section>
-        <div class="anchor" *ngIf="isReady" ngPreserveWhitespaces>
 
+        <div class="anchor" *ngIf="isReady">
             <app-bookmark [inputArray]="titleArray" [contentLoading]="onContentLoading"></app-bookmark>
-
         </div>
 
     </mat-sidenav-content>
