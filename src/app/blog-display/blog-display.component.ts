@@ -2,12 +2,8 @@ import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, } from '@an
 import { KatexOptions, MarkdownService } from 'ngx-markdown';
 import { ArticlesService, article } from '../services/articles.service';
 import { ActivatedRoute } from '@angular/router';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
-import { CategoriesService } from '../services/categories.service';
-import { Observable } from 'rxjs';
 import hljs from 'highlight.js/lib/common';
-
+import hljs_dockerfile from 'highlight.js/lib/languages/dockerfile'
 
 
 interface subTitle {
@@ -117,6 +113,10 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
     };
     this.onContentLoading = false;
   }
+
+  registerNewSupportedHighlight(){
+    hljs.registerLanguage('dockerfile',hljs_dockerfile);
+  }
   // -------------------- markdown process --------------------------
 
 
@@ -126,7 +126,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
       this.isReady = true;
       document.querySelectorAll('pre').forEach((el: HTMLElement) => {
         el.style.background = '#033456';
-        hljs.highlightElement(el.firstElementChild as HTMLElement);
+        hljs.highlightElement(el.firstElementChild as HTMLElement);        
       })
     }, 1000);
 
@@ -138,6 +138,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
+    this.registerNewSupportedHighlight()
     this.route.params.subscribe({
       next: (value) => {
         this.initAnchorAndMarkdownValue();
