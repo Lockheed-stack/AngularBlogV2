@@ -15,7 +15,7 @@
         url("../../assets/imgs/login-image.jpg") no-repeat;
     background-size: cover;
     
-    position: absolute;
+    position: fixed;
     width: 100%;
     /* min-height: 100vh; */
     height: 100%;
@@ -23,10 +23,7 @@
     /* top: 0;
     left: 0; */
     /* z-index: -1; */
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+
     
 }
 
