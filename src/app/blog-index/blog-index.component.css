@@ -22,7 +22,6 @@ mat-sidenav-content {
     min-height: 100vh;
     max-height: 100%;
     width: 100%;
-    position: fixed;
     background: linear-gradient(to right, #91eae4ed, #86a8e79f, #7f7fd5a5);
 
 }
