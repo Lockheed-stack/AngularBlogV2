@@ -14,7 +14,7 @@
     background:
         url("../../assets/imgs/login-image.jpg") repeat;
     background-size: 100% auto;
-    position: fixed;
+    position: relative;
     width: 100%;
     min-height: 100vh;
     max-height: 100%;
@@ -71,6 +71,4 @@ mat-toolbar {
     /* background: rgb(224, 223, 219);
     overflow-y: auto; */
 }
-mat-card{
-    background-color:#ffc800
-}
+
