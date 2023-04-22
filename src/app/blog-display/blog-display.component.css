@@ -15,7 +15,7 @@
         url("../../assets/imgs/login-image.jpg") no-repeat;
     background-size: cover;
     
-    position: relative;
+    position: absolute;
     width: 100%;
     /* min-height: 100vh; */
     height: 100%;
@@ -23,6 +23,11 @@
     /* top: 0;
     left: 0; */
     /* z-index: -1; */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
 }
 
 .markdown-body {
@@ -35,6 +40,7 @@
 @media (max-width: 767px) {
     .markdown-body {
         padding: 15px;
+        width: 100%;
     }
 }
 
@@ -60,6 +66,15 @@
     background: #fff;
     box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.25);
     max-height: fit-content;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+@media (max-width: 767px) {
+    .wrapper {
+        padding: 15px;
+        width: 100%;
+    }
 }
 
 .anchor{
