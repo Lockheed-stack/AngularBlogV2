@@ -25,6 +25,7 @@
         nz-popover nzPopoverTrigger="click" nzPopoverTitle="分享链接"
         [nzPopoverContent]="QRcodeTmp"
         nzPopoverOverlayClassName="popover"
+        (click)="onShareClicked()"
         >
             <mat-icon>share</mat-icon>
         </button>
@@ -38,5 +39,5 @@
 </mat-toolbar>
 
 <ng-template #QRcodeTmp>
-    <nz-qrcode nzValue="https://leelennin.top"></nz-qrcode>
+    <nz-qrcode [nzValue]="QRcodeURL"></nz-qrcode>
 </ng-template>

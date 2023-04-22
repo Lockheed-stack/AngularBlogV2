@@ -1,5 +1,7 @@
-import { Component,  Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-tool-bar',
@@ -7,9 +9,21 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./tool-bar.component.css']
 })
 export class ToolBarComponent {
-  @Input() element:MatSidenav
+  @Input() element: MatSidenav
 
-  onToggleClicked(){
+  constructor(
+    private router: Router,
+    private globalVar: GlobalService
+  ) { }
+
+  QRcodeURL: string = this.globalVar.domain;
+
+  onToggleClicked() {
     this.element.toggle()
+  }
+  onShareClicked() {
+    if (this.router.url.length > 1) {
+      this.QRcodeURL = this.QRcodeURL + this.router.url.substring(1);
+    }
   }
 }
