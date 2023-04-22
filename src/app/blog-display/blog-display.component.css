@@ -12,9 +12,10 @@
 
 .background {
     background:
-        url("../../assets/imgs/login-image.jpg") repeat;
-    background-size: 100% auto;
-    /* position: absolute; */
+        url("../../assets/imgs/login-image.jpg") no-repeat;
+    background-size: cover;
+    
+    position: absolute;
     width: 100%;
     /* min-height: 100vh; */
     height: 100%;
@@ -37,9 +38,6 @@
     }
 }
 
-mat-toolbar {
-    position: fixed;
-}
 
 .pageTitle {
     color: #FF7600;
