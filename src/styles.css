@@ -17,7 +17,7 @@ body {
 }
 
 .bookmarkPopover .ant-popover-inner-content {
-    overflow: auto;
+    overflow-y: auto;
     height: 80vh;
     max-width: 60vw;
     background: #683ab75e;

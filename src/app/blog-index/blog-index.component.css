@@ -6,9 +6,9 @@
     right: 0;
 }
 
-.example-card {
+/* .example-card {
     max-width: 400px;
-}
+} */
 
 .example-header-image {
     background-image: url('../../assets/imgs/logo.png');
@@ -27,7 +27,7 @@ mat-sidenav {
 mat-sidenav-content {
     min-height: 100vh;
     max-height: 100%;
-
+    width: 100%;
     /* background: #7f7fd5; */
     background: linear-gradient(to right, #91eae4ed, #86a8e79f, #7f7fd5a5);
 
@@ -45,8 +45,7 @@ h1 {
     height: 100%;
     background-size: 130%;
     overflow: hidden; */
-    background: url("../../assets/imgs/antoine-barres.jpg") no-repeat 50% 50% fixed;
-
+    background: url("../../assets/imgs/antoine-barres.jpg");
     background-color: #b2afab;
     background-position: center center;
     background-size: cover;
