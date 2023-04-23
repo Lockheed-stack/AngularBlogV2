@@ -9,7 +9,10 @@
 mat-sidenav{
     position: fixed;
 }
-
+app-tool-bar{
+    position: -webkit-sticky;
+    position: sticky;
+}
 .background {
     background:
         url("../../assets/imgs/login-image.jpg")center no-repeat;
