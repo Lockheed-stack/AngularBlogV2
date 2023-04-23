@@ -7,7 +7,9 @@
 }
 
 mat-sidenav{
-    position: fixed;
+    position: absolute;
+    top: 0;
+    bottom: 0;
 }
 app-tool-bar{
     position: -webkit-sticky;
@@ -26,8 +28,9 @@ app-tool-bar{
     /* top: 0;
     left: 0; */
     /* z-index: -1; */
-
-    
+}
+.content{
+    height: inherit;
 }
 
 .markdown-body {
