@@ -6,13 +6,13 @@
     right: 0;
 }
 
-/* .example-spacer {
-    flex: 1 1 auto;
-} */
+mat-sidenav{
+    position: fixed;
+}
 
 .background {
     background:
-        url("../../assets/imgs/login-image.jpg") no-repeat;
+        url("../../assets/imgs/login-image.jpg")center no-repeat;
     background-size: cover;
     
     position: fixed;
