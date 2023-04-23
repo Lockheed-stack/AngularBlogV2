@@ -48,7 +48,7 @@ h1 {
     background-color: #b2afab;
     /* background-position: center center; */
     background-size: cover;
-    
+    overflow: hidden;
     /* min-height: 100%;
     max-height: 800px; */
     height: 100%;
