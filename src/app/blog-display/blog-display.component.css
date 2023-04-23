@@ -19,8 +19,6 @@ app-tool-bar{
     background:
         url("../../assets/imgs/login-image.jpg")center no-repeat;
     background-size: cover;
-    
-    position: fixed;
     width: 100%;
     /* min-height: 100vh; */
     height: 100%;
