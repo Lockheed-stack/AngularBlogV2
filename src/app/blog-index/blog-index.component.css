@@ -38,7 +38,7 @@ h1 {
     height: 100%;
     background-size: 130%;
     overflow: hidden; */
-    background: url("../../assets/imgs/antoine-barres.jpg");
+    background: url("../../assets/imgs/antoine-barres.jpg") center no-repeat;
     background-color: #b2afab;
     /* background-position: center center; */
     background-size: cover;

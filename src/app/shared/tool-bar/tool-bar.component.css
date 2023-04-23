@@ -4,6 +4,7 @@
 mat-toolbar{
     width: 100%;
     top: 0;
+    position:-webkit-sticky;
     position: sticky;
     z-index: 200;
 }
