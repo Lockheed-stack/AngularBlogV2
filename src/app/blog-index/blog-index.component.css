@@ -205,3 +205,9 @@ mat-card img {
     max-height: 240px;
     max-width: 380px;
 }
+@media screen and (max-width:600px){
+    mat-card img{
+        max-height: 240px;
+        max-width: 300px;
+    }
+}
