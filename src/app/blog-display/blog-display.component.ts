@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, } from '@angular/core';
 import { KatexOptions, MarkdownService } from 'ngx-markdown';
 import { ArticlesService, article } from '../services/articles.service';
 import { ActivatedRoute } from '@angular/router';
 import hljs from 'highlight.js/lib/common';
 import hljs_dockerfile from 'highlight.js/lib/languages/dockerfile'
+import { MediaMatcher } from '@angular/cdk/layout';
+import { GlobalService } from '../services/global.service';
 
 
 interface subTitle {
@@ -23,7 +25,7 @@ interface Title {
   templateUrl: './blog-display.component.html',
   styleUrls: ['./blog-display.component.css']
 })
-export class BlogDisplayComponent implements OnInit, AfterViewInit {
+export class BlogDisplayComponent implements OnInit, AfterViewInit,OnDestroy {
 
   //markdown variable
   markdownData: string = "";
@@ -44,12 +46,23 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
   articleDesc: string = "";
   articleInfo: article;
 
+
+  // mobile support
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+
+
   constructor(
     private markdownService: MarkdownService,
     private articleService: ArticlesService,
     private route: ActivatedRoute,
-
-  ) { }
+    private globalVar: GlobalService,
+    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addEventListener("change",this._mobileQueryListener);
+  }
 
 
   // ------------------ markdown process ---------------------
@@ -114,8 +127,8 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
     this.onContentLoading = false;
   }
 
-  registerNewSupportedHighlight(){
-    hljs.registerLanguage('dockerfile',hljs_dockerfile);
+  registerNewSupportedHighlight() {
+    hljs.registerLanguage('dockerfile', hljs_dockerfile);
   }
   // -------------------- markdown process --------------------------
 
@@ -126,7 +139,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
       this.isReady = true;
       document.querySelectorAll('pre').forEach((el: HTMLElement) => {
         el.style.background = '#033456';
-        hljs.highlightElement(el.firstElementChild as HTMLElement);        
+        hljs.highlightElement(el.firstElementChild as HTMLElement);
       })
     }, 1000);
 
@@ -193,4 +206,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit {
 
   }
 
+  ngOnDestroy(): void {
+    this.mobileQuery.removeEventListener("change",this._mobileQueryListener);
+  }
 }

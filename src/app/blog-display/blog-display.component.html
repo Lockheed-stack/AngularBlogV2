@@ -1,13 +1,15 @@
-<mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav [mode]="'push'" [autoFocus]="false">
-        <app-side-nav></app-side-nav>
-    </mat-sidenav>
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
 
-    <mat-sidenav-content class="background">
+    <app-tool-bar [element]="snav" class="example-toolbar"></app-tool-bar>
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56"
+            [autoFocus]="false">
+            <app-side-nav></app-side-nav>
+        </mat-sidenav>
 
-        <div class="content">
-            <app-tool-bar [element]="sidenav"></app-tool-bar>
-
+        <mat-sidenav-content class="background">
             <div class="wrapper">
                 <header>
                     <nz-skeleton [nzActive]="onTitleLoading" [nzLoading]="onTitleLoading">
@@ -18,18 +20,18 @@
             </div>
             <section class="markdown-body">
 
-                <nz-skeleton [nzActive]="onContentLoading" [nzLoading]="onContentLoading">
+                <!-- <nz-skeleton [nzActive]="onContentLoading" [nzLoading]="onContentLoading">
                 </nz-skeleton>
                 <div markdown (ready)="onReady()" katex ngPreserveWhitespaces [disableSanitizer]="true"
                     [data]="markdownData">
-                </div>
-                <!-- <markdown katex src="../../assets/test.md"></markdown> -->
+                </div> -->
+                <markdown katex src="../../assets/test.md"></markdown>
 
             </section>
-        </div>
-
-        <div class="anchor" *ngIf="isReady">
-            <app-bookmark [inputArray]="titleArray" [contentLoading]="onContentLoading"></app-bookmark>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+            
+            <div class="anchor" *ngIf="isReady">
+                <app-bookmark [inputArray]="titleArray" [contentLoading]="onContentLoading"></app-bookmark>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
