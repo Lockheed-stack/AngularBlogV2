@@ -76,7 +76,7 @@ mat-sidenav-container {
 
 .presentation-title {
 
-    font-size: 10em;
+    font-size: 10vw;
     font-weight: 700;
     margin: 0;
     padding: 1em;
@@ -192,7 +192,10 @@ mat-card {
     height: auto;
     width: auto;
 }
-
+.card-header-image {
+    background-image: url('../../assets/imgs/logo.png');
+    background-size: cover;
+}
 mat-card:hover {
     cursor: pointer;
     box-shadow: 0 0 20px 6px #65096fbc;
@@ -200,4 +203,5 @@ mat-card:hover {
 
 mat-card img {
     max-height: 240px;
+    max-width: 380px;
 }
