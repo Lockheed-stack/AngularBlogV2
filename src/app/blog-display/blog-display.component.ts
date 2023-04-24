@@ -1,11 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnChanges, OnDestroy, OnInit, SimpleChanges, } from '@angular/core';
-import { KatexOptions, MarkdownService } from 'ngx-markdown';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, } from '@angular/core';
+import { MarkdownService } from 'ngx-markdown';
 import { ArticlesService, article } from '../services/articles.service';
 import { ActivatedRoute } from '@angular/router';
 import hljs from 'highlight.js/lib/common';
 import hljs_dockerfile from 'highlight.js/lib/languages/dockerfile'
 import { MediaMatcher } from '@angular/cdk/layout';
-import { GlobalService } from '../services/global.service';
+
 
 
 interface subTitle {
@@ -56,7 +56,6 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit,OnDestroy {
     private markdownService: MarkdownService,
     private articleService: ArticlesService,
     private route: ActivatedRoute,
-    private globalVar: GlobalService,
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');

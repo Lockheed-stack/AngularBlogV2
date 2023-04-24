@@ -2,15 +2,14 @@
 
     <app-tool-bar [element]="snav" class="example-toolbar"></app-tool-bar>
     <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        
+
         <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-            fixedTopGap="56"
-            [autoFocus]="false">
+            fixedTopGap="56" [autoFocus]="false">
             <app-side-nav></app-side-nav>
         </mat-sidenav>
 
         <mat-sidenav-content class="background">
-            <div class="wrapper">
+            <div class="wrapper" [style]="mobileQuery.matches?'padding: 15px;max-width: 375px;min-width: 200px;':''">
                 <header>
                     <nz-skeleton [nzActive]="onTitleLoading" [nzLoading]="onTitleLoading">
                     </nz-skeleton>
@@ -18,7 +17,8 @@
                     <h2 class="pageSubTitle" *ngIf="!onTitleLoading">{{articleDesc}}</h2>
                 </header>
             </div>
-            <section class="markdown-body">
+            <section class="markdown-body"
+                [style]="mobileQuery.matches?'padding: 15px;max-width: 375px;min-width: 200px;':''">
 
                 <nz-skeleton [nzActive]="onContentLoading" [nzLoading]="onContentLoading">
                 </nz-skeleton>
@@ -28,7 +28,7 @@
                 <!-- <markdown katex src="../../assets/test.md"></markdown> -->
 
             </section>
-            
+
             <div class="anchor" *ngIf="isReady">
                 <app-bookmark [inputArray]="titleArray" [contentLoading]="onContentLoading"></app-bookmark>
             </div>
