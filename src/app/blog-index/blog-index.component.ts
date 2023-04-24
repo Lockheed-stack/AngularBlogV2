@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ArticlesService } from '../services/articles.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalService } from '../services/global.service';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 interface RespondData {
   id: number;
@@ -17,7 +18,7 @@ interface RespondData {
   templateUrl: './blog-index.component.html',
   styleUrls: ['./blog-index.component.css']
 })
-export class BlogIndexComponent implements OnInit {
+export class BlogIndexComponent implements OnInit,OnDestroy {
 
   articleData: Array<RespondData> = [];
   iconBtnLikeType: Map<number, string> = new Map<number, string>();
@@ -25,14 +26,34 @@ export class BlogIndexComponent implements OnInit {
 
   breakPoint: number;
   rowHeightRatio: string;
-  grid:HTMLElement;
-  gridHot:HTMLElement;
+  grid: HTMLElement;
+  gridHot: HTMLElement;
+
+
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
+
+  fillerContent = Array.from(
+    { length: 50 },
+    () =>
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+       labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+       laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+       voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+       cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`,
+  );
 
   constructor(
     private articlesService: ArticlesService,
     private router: Router,
     private globalVar: GlobalService,
-  ) { }
+    changeDetectorRef: ChangeDetectorRef, media: MediaMatcher
+  ) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
   onTileClick(id: number) {
     this.router.navigate(['article/', id]);
@@ -53,7 +74,7 @@ export class BlogIndexComponent implements OnInit {
     if (innerWidth <= 800) {
       this.grid.style.height = "1600px";
       this.gridHot.style.height = "1600px";
-    } else{
+    } else {
       this.grid.style.height = "600px";
       this.gridHot.style.height = "600px";
     }
@@ -96,5 +117,9 @@ export class BlogIndexComponent implements OnInit {
         console.log(err)
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 }

@@ -1,122 +1,135 @@
-<mat-sidenav-container class="example-container">
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <!-- <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <h1 class="example-app-name">Responsive App</h1>
+    </mat-toolbar> -->
 
-    <mat-sidenav #sidenav [mode]="'push'" [autoFocus]="false">
-        <app-side-nav></app-side-nav>
-    </mat-sidenav>
+    <app-tool-bar [element]="snav" class="example-toolbar"></app-tool-bar>
 
-    <mat-sidenav-content>
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+            fixedTopGap="56">
+            <app-side-nav></app-side-nav>
+        </mat-sidenav>
 
-        <app-tool-bar [element]="sidenav"></app-tool-bar>
+        <mat-sidenav-content>
 
-        <div class="hero" #TopAnchor>
-            <h1 class="presentation-title">Lee's Blogs</h1>
-            <div class="fog-low">
-                <img src="../../assets/imgs/fog-low.png" alt="">
+            <div class="page-header" #TopAnchor>
+                <div class="filter"></div>
+                <div class="title-brand">
+                    <h1 class="presentation-title">Lee's Blogs</h1>
+                    <div class="fog-low">
+                        <img src="../../assets/imgs/fog-low.png" alt="">
+                    </div>
+                    <div class="fog-low right">
+                        <img src="../../assets/imgs/fog-low.png" alt="">
+                    </div>
+                </div>
+
+                <div class="moving-clouds" style="background-image: url('../../assets/imgs/clouds.png'); "></div>
             </div>
-            <div class="fog-low right">
-                <img src="../../assets/imgs/fog-low.png" alt="">
+
+
+            <div class="content-wrapper">
+                <h1>新文章</h1>
+                <h3>
+                    应该说是新上传的文章。有些笔记很早之前就写的。
+                </h3>
+
+                <mat-grid-list id="grid-list" [cols]="breakPoint" rowHeight="fit" gutterSize="5px"
+                    (window:resize)="onResize($event)">
+                    <mat-grid-tile *ngFor="let item of articleData">
+
+                        <mat-card class="example-card">
+
+                            <mat-card-header (click)="onTileClick(item.id)">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>{{item.title}}</mat-card-title>
+                                <mat-card-subtitle>所属类别: {{item.catalogName}}</mat-card-subtitle>
+                                <mat-card-subtitle>发表日期: {{item.createdAt|date:'y MMM d'}}</mat-card-subtitle>
+                            </mat-card-header>
+
+                            <img *ngIf="item.img!=='';else defaultImg" mat-card-image [src]="item.img"
+                                (click)="onTileClick(item.id)">
+                            <ng-template #defaultImg>
+                                <!-- <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element> -->
+                                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                                    alt="Photo of a Shiba Inu" (click)="onTileClick(item.id)">
+                            </ng-template>
+
+                            <mat-card-content (click)="onTileClick(item.id)">
+                                <p>{{item.desc}}</p>
+                            </mat-card-content>
+
+                            <mat-card-actions>
+                                <button mat-icon-button (click)="onLikeClick(item.id)"><ng-icon
+                                        [name]="iconBtnLikeType.get(item.id)"></ng-icon></button>
+                                <button mat-icon-button nz-popover nzPopoverTrigger="click" nzPopoverTitle="分享链接"
+                                    [nzPopoverContent]="QRcodeTmp" nzPopoverOverlayClassName="popover"
+                                    (click)="onShareClick(item.id)"><ng-icon name="bootstrapShare"></ng-icon>
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+
+                    </mat-grid-tile>
+                </mat-grid-list>
             </div>
-            <div class="moving-clouds" style="background-image: url('../../assets/imgs/clouds.png'); "></div>
-        </div>
 
-        <div class="content-wrapper">
-            <h1>新文章</h1>
-            <h3>
-                应该说是新上传的文章。有些笔记很早之前就写的。
-            </h3>
+            <mat-divider></mat-divider>
 
-            <mat-grid-list id="grid-list" [cols]="breakPoint" rowHeight="fit" gutterSize="5px"
-                (window:resize)="onResize($event)">
-                <mat-grid-tile *ngFor="let item of articleData">
+            <div class="content-wrapper">
+                <!-- <h2>🔥热门</h2> -->
+                <span class="fire">🔥</span>
+                <span class="title">热门</span>
+                <h3>
+                    近期访问量较多的文章。
+                </h3>
+                <mat-grid-list id="grid-list-hot" [cols]="breakPoint" rowHeight="fit" gutterSize="5px"
+                    (window:resize)="onResize($event)">
+                    <mat-grid-tile *ngFor="let item of articleData">
+    
+                        <mat-card class="example-card">
+    
+                            <mat-card-header (click)="onTileClick(item.id)">
+                                <div mat-card-avatar class="example-header-image"></div>
+                                <mat-card-title>{{item.title}}</mat-card-title>
+                                <mat-card-subtitle>所属类别: {{item.catalogName}}</mat-card-subtitle>
+                                <mat-card-subtitle>发表日期: {{item.createdAt|date:'y MMM d'}}</mat-card-subtitle>
+                            </mat-card-header>
+    
+                            <img *ngIf="item.img!=='';else defaultImg" mat-card-image [src]="item.img"
+                                (click)="onTileClick(item.id)">
+                            <ng-template #defaultImg>
+                                <!-- <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element> -->
+                                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                                    alt="Photo of a Shiba Inu" (click)="onTileClick(item.id)">
+                            </ng-template>
+    
+                            <mat-card-content (click)="onTileClick(item.id)">
+                                <p>{{item.desc}}</p>
+                            </mat-card-content>
+    
+                            <mat-card-actions>
+                                <button mat-icon-button (click)="onLikeClick(item.id)"><ng-icon
+                                        [name]="iconBtnLikeType.get(item.id)"></ng-icon></button>
+                                <button mat-icon-button nz-popover nzPopoverTrigger="click" nzPopoverTitle="分享链接"
+                                    [nzPopoverContent]="QRcodeTmp" nzPopoverOverlayClassName="popover"
+                                    (click)="onShareClick(item.id)"><ng-icon name="bootstrapShare"></ng-icon>
+                                </button>
+                            </mat-card-actions>
+                        </mat-card>
+    
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
 
-                    <mat-card class="example-card">
 
-                        <mat-card-header (click)="onTileClick(item.id)">
-                            <div mat-card-avatar class="example-header-image"></div>
-                            <mat-card-title>{{item.title}}</mat-card-title>
-                            <mat-card-subtitle>所属类别: {{item.catalogName}}</mat-card-subtitle>
-                            <mat-card-subtitle>发表日期: {{item.createdAt|date:'y MMM d'}}</mat-card-subtitle>
-                        </mat-card-header>
-
-                        <img *ngIf="item.img!=='';else defaultImg" mat-card-image [src]="item.img"
-                            (click)="onTileClick(item.id)">
-                        <ng-template #defaultImg>
-                            <!-- <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element> -->
-                            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                                alt="Photo of a Shiba Inu" (click)="onTileClick(item.id)">
-                        </ng-template>
-
-                        <mat-card-content (click)="onTileClick(item.id)">
-                            <p>{{item.desc}}</p>
-                        </mat-card-content>
-
-                        <mat-card-actions>
-                            <button mat-icon-button (click)="onLikeClick(item.id)"><ng-icon
-                                    [name]="iconBtnLikeType.get(item.id)"></ng-icon></button>
-                            <button mat-icon-button nz-popover nzPopoverTrigger="click" nzPopoverTitle="分享链接"
-                                [nzPopoverContent]="QRcodeTmp" nzPopoverOverlayClassName="popover"
-                                (click)="onShareClick(item.id)"><ng-icon name="bootstrapShare"></ng-icon>
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
-
-                </mat-grid-tile>
-            </mat-grid-list>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <div class="content-wrapper">
-            <!-- <h2>🔥热门</h2> -->
-            <span class="fire">🔥</span>
-            <span class="title">热门</span>
-            <h3>
-                近期访问量较多的文章。
-            </h3>
-            <mat-grid-list id="grid-list-hot" [cols]="breakPoint" rowHeight="fit" gutterSize="5px"
-                (window:resize)="onResize($event)">
-                <mat-grid-tile *ngFor="let item of articleData">
-
-                    <mat-card class="example-card">
-
-                        <mat-card-header (click)="onTileClick(item.id)">
-                            <div mat-card-avatar class="example-header-image"></div>
-                            <mat-card-title>{{item.title}}</mat-card-title>
-                            <mat-card-subtitle>所属类别: {{item.catalogName}}</mat-card-subtitle>
-                            <mat-card-subtitle>发表日期: {{item.createdAt|date:'y MMM d'}}</mat-card-subtitle>
-                        </mat-card-header>
-
-                        <img *ngIf="item.img!=='';else defaultImg" mat-card-image [src]="item.img"
-                            (click)="onTileClick(item.id)">
-                        <ng-template #defaultImg>
-                            <!-- <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element> -->
-                            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                                alt="Photo of a Shiba Inu" (click)="onTileClick(item.id)">
-                        </ng-template>
-
-                        <mat-card-content (click)="onTileClick(item.id)">
-                            <p>{{item.desc}}</p>
-                        </mat-card-content>
-
-                        <mat-card-actions>
-                            <button mat-icon-button (click)="onLikeClick(item.id)"><ng-icon
-                                    [name]="iconBtnLikeType.get(item.id)"></ng-icon></button>
-                            <button mat-icon-button nz-popover nzPopoverTrigger="click" nzPopoverTitle="分享链接"
-                                [nzPopoverContent]="QRcodeTmp" nzPopoverOverlayClassName="popover"
-                                (click)="onShareClick(item.id)"><ng-icon name="bootstrapShare"></ng-icon>
-                            </button>
-                        </mat-card-actions>
-                    </mat-card>
-
-                </mat-grid-tile>
-            </mat-grid-list>
-        </div>
-        <div>
-            <app-foot [scrollTopAnchor]="TopAnchor"></app-foot>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
-
+            <div>
+                <app-foot [scrollTopAnchor]="TopAnchor"></app-foot>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
 
 <ng-template #QRcodeTmp>
     <nz-qrcode [nzValue]="articleShareSrc"></nz-qrcode>

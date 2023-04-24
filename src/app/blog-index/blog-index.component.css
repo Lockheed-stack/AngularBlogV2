@@ -1,96 +1,119 @@
 .example-container {
-    position: fixed;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
 }
 
-.example-card {
-    max-width: 400px;
+.example-is-mobile .example-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
 }
 
-.example-header-image {
-    background-image: url('../../assets/imgs/logo.png');
-    background-size: cover;
+h1.example-app-name {
+    margin-left: 8px;
 }
 
-mat-sidenav {
-    overflow-y: auto;
+.example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
 }
-app-tool-bar{
-    position:-webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 200;
+
+.example-is-mobile .example-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
 }
-mat-sidenav-content {
-    min-height: 100vh;
-    max-height: 100%;
-    width: 100%;
+
+mat-sidenav-container {
     background: linear-gradient(to right, #91eae4ed, #86a8e79f, #7f7fd5a5);
-    position: relative;
 }
 
-h1 {
-    text-align: center;
-    font-family: Ubuntu;
-    letter-spacing: 1px;
-}
-
-.hero {
-    /* position: relative;
-    width: 100%;
-    height: 100%;
-    background-size: 130%;
-    overflow: hidden; */
+.page-header {
     background: url("../../assets/imgs/antoine-barres.jpg") center no-repeat;
-    background-color: #b2afab;
-    /* background-position: center center; */
+    background-color: #B2AFAB;
+    background-position: center center;
     background-size: cover;
-    overflow: hidden;
-    /* min-height: 100%;
-    max-height: 800px; */
-    height: 100%;
+    min-height: 100vh;
+    max-height: 999px;
     overflow: hidden;
     position: relative;
     width: 100%;
-    /* z-index: 1;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+
+    /* Center vertically */
     align-items: center;
+    /*Center horizontaly */
     justify-content: center;
-    -ms-flex-pack: center */
 }
 
-.hero h1 {
-    position: absolute;
-    top: 35%;
+.page-header .filter::after {
+    background-color: rgba(0, 0, 0, 0.5);
+    content: "";
+    display: block;
+    height: 100%;
     left: 0;
+    top: 0;
+    position: absolute;
     width: 100%;
-    padding: .6em;
-    /* font-size: 3em;
-    font-weight: lighter; */
+    z-index: 1;
+}
+
+.title-brand {
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    color: #FFFFFF;
+    display: block;
 }
 
 .presentation-title {
-    font-size: 10vw;
+
+    font-size: 10em;
     font-weight: 700;
     margin: 0;
-    
+    padding: 1em;
     color: #FFFFFF;
-    /* background: #fbf8ec; */
-    background: -moz-linear-gradient(to bottom, #f1cece 35%, #6b0033 100%);
-    background: -webkit-linear-gradient(to bottom, #f1cece 35%, #6b0033 100%);
-    background: -ms-linear-gradient(to bottom, #f1cece 35%, #6b0033 100%);
-    background: -o-linear-gradient(to bottom, #f1cece 35%, #6b0033 100%);
-    background: linear-gradient(to bottom, #f1cece 35%, #6b0033 100%);
 
+    background: -moz-linear-gradient(to bottom, #FFFFFF 35%, #87267c 100%);
+    background: -webkit-linear-gradient(to bottom, #FFFFFF 35%, #87267c 100%);
+    background: -ms-linear-gradient(to bottom, #FFFFFF 35%, #87267c 100%);
+    background: -o-linear-gradient(to bottom, #FFFFFF 35%, #87267c 100%);
+    background: linear-gradient(to bottom, #FFFFFF 35%, #87267c 100%);
+
+    -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .fog-low {
-    margin-bottom: -35px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: -35%;
+    margin-bottom: -50px;
+    width: 110%;
+    opacity: .85;
+}
+
+.fog-low.right {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: -35%;
+    margin-bottom: -50px;
+    width: 110%;
+    opacity: .85;
+
+    margin-left: 30%;
+    opacity: 1;
 }
 
 .moving-clouds {
@@ -136,6 +159,7 @@ h1 {
 
 .content-wrapper h3 {
     margin-top: 30px;
+    font-size: 2em;
 }
 
 .content-wrapper span.fire {
@@ -149,19 +173,15 @@ h1 {
     -webkit-text-fill-color: transparent;
 }
 
-.content-wrapper p {
+mat-card-content p {
     margin-top: 30px;
     font-family: "Open Sans";
     font-size: 1.2em;
 }
 
-mat-grid-list{
+mat-grid-list {
     height: 600px;
 }
-/* mat-grid-tile {
-    width: fit-content;
-    height: 550px;
-} */
 
 mat-card {
     padding: 0 10px;
