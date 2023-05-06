@@ -39,7 +39,7 @@
 
                 <mat-grid-list id="grid-list" [cols]="breakPoint" rowHeight="fit" gutterSize="5px"
                     (window:resize)="onResize($event)">
-                    <mat-grid-tile *ngFor="let item of articleData">
+                    <mat-grid-tile *ngFor="let item of Last3articleData">
 
                         <mat-card class="example-card">
 
@@ -48,6 +48,10 @@
                                 <mat-card-title>{{item.title}}</mat-card-title>
                                 <mat-card-subtitle>所属类别: {{item.catalogName}}</mat-card-subtitle>
                                 <mat-card-subtitle>发表日期: {{item.createdAt|date:'y MMM d'}}</mat-card-subtitle>
+                                <mat-card-subtitle>
+                                    <ng-icon name="bootstrapEyeFill"></ng-icon>
+                                    {{item.pv}}
+                                </mat-card-subtitle>
                             </mat-card-header>
 
                             <img *ngIf="item.img!=='';else defaultImg" mat-card-image [src]="item.img"
@@ -87,7 +91,7 @@
                 </h3>
                 <mat-grid-list id="grid-list-hot" [cols]="breakPoint" rowHeight="fit" gutterSize="5px"
                     (window:resize)="onResize($event)">
-                    <mat-grid-tile *ngFor="let item of articleData">
+                    <mat-grid-tile *ngFor="let item of Hot3articleData">
     
                         <mat-card class="example-card">
     
@@ -96,6 +100,10 @@
                                 <mat-card-title>{{item.title}}</mat-card-title>
                                 <mat-card-subtitle>所属类别: {{item.catalogName}}</mat-card-subtitle>
                                 <mat-card-subtitle>发表日期: {{item.createdAt|date:'y MMM d'}}</mat-card-subtitle>
+                                <mat-card-subtitle>
+                                    <ng-icon name="bootstrapEyeFill"></ng-icon>
+                                    {{item.pv}}
+                                </mat-card-subtitle>
                             </mat-card-header>
     
                             <img *ngIf="item.img!=='';else defaultImg" mat-card-image [src]="item.img"

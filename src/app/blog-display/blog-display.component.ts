@@ -25,7 +25,7 @@ interface Title {
   templateUrl: './blog-display.component.html',
   styleUrls: ['./blog-display.component.css']
 })
-export class BlogDisplayComponent implements OnInit, AfterViewInit,OnDestroy {
+export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //markdown variable
   markdownData: string = "";
@@ -44,6 +44,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit,OnDestroy {
   articleId: number = 0;
   articleTitle: string = "";
   articleDesc: string = "";
+  articlePv: number = 0;
   articleInfo: article;
 
 
@@ -60,7 +61,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit,OnDestroy {
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener("change",this._mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
 
@@ -165,6 +166,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit,OnDestroy {
                 this.articleInfo = value;
                 this.articleTitle = value.data["title"];
                 this.articleDesc = value.data["desc"];
+                this.articlePv = value.data["pv"]
                 this.onTitleLoading = false;
 
                 if (value.data["content"] === "") {
@@ -206,6 +208,6 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener("change",this._mobileQueryListener);
+    this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
   }
 }

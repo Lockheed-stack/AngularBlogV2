@@ -12,9 +12,14 @@
             <div class="wrapper" [style]="mobileQuery.matches?'padding: 15px;max-width: 375px;min-width: 200px;':''">
                 <header>
                     <nz-skeleton [nzActive]="onTitleLoading" [nzLoading]="onTitleLoading">
+                        <h1 class="pageTitle" >{{articleTitle}} </h1>
+                        <h2 class="pageSubTitle" >{{articleDesc}}</h2>
+                        <div class="pageviewCount">
+                            <h3 style="margin-right: 10px;">阅读量: {{articlePv}}</h3>
+                            <mat-icon><ng-icon name="bootstrapEyeFill"></ng-icon></mat-icon>
+                        </div>
                     </nz-skeleton>
-                    <h1 class="pageTitle" *ngIf="!onTitleLoading">{{articleTitle}} </h1>
-                    <h2 class="pageSubTitle" *ngIf="!onTitleLoading">{{articleDesc}}</h2>
+
                 </header>
             </div>
             <section class="markdown-body"

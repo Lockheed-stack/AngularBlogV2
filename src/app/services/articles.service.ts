@@ -63,7 +63,10 @@ export class ArticlesService {
     const url: string = this.domain + "controller/article/list/last";
     return this.http.get<article>(url,).pipe(catchError(() => of(null)));
   }
-
+  getHot3ArticlesInfo(): Observable<article> {
+    const url: string = this.domain + "controller/article/list/hot";
+    return this.http.get<article>(url,).pipe(catchError(() => of(null)));
+  }
 
   getSingleArticleInfo(id: number): Observable<article> {
     const url: string = this.domain + 'controller/article/';

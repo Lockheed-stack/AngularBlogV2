@@ -9,6 +9,7 @@ interface RespondData {
   title: string;
   desc: string;
   img: string;
+  pv: number;
   createdAt: string;
   catalogName: string;
 }
@@ -18,9 +19,10 @@ interface RespondData {
   templateUrl: './blog-index.component.html',
   styleUrls: ['./blog-index.component.css']
 })
-export class BlogIndexComponent implements OnInit,OnDestroy {
+export class BlogIndexComponent implements OnInit, OnDestroy {
 
-  articleData: Array<RespondData> = [];
+  Last3articleData: Array<RespondData> = [];
+  Hot3articleData: Array<RespondData> = [];
   iconBtnLikeType: Map<number, string> = new Map<number, string>();
   articleShareSrc: string = this.globalVar.domain;
 
@@ -42,7 +44,7 @@ export class BlogIndexComponent implements OnInit,OnDestroy {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     // this.mobileQuery.addListener(this._mobileQueryListener);
-    this.mobileQuery.addEventListener("change",this._mobileQueryListener);
+    this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
 
   onTileClick(id: number) {
@@ -94,10 +96,44 @@ export class BlogIndexComponent implements OnInit,OnDestroy {
               title: val['title'],
               desc: val['desc'],
               img: tmp,
+              pv: val['pv'],
               createdAt: val['Catalog']['CreatedAt'],
               catalogName: val['Catalog']['name']
             }
-            this.articleData.push(item);
+            this.Last3articleData.push(item);
+            this.iconBtnLikeType.set(val['ID'], "bootstrapHeart");
+          }
+        }
+        // console.log(this.articleData)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+
+    this.articlesService.getHot3ArticlesInfo().subscribe({
+      next: (value) => {
+        if (value === null) {
+          console.log(value)
+        } else {
+          for (let val of value.data) {
+
+            // the website is https, but this request is http. It should be convert in nginx.
+            let tmp: string = val['img'];
+            // if (!tmp.startsWith("http", 0) && tmp !== "") {
+            //   tmp = "http://".concat(tmp)
+            // }
+
+            const item: RespondData = {
+              id: val['ID'],
+              title: val['title'],
+              desc: val['desc'],
+              img: tmp,
+              pv: val['pv'],
+              createdAt: val['Catalog']['CreatedAt'],
+              catalogName: val['Catalog']['name']
+            }
+            this.Hot3articleData.push(item);
             this.iconBtnLikeType.set(val['ID'], "bootstrapHeart");
           }
         }
@@ -110,6 +146,6 @@ export class BlogIndexComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener("change",this._mobileQueryListener);
+    this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
   }
 }

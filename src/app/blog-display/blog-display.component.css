@@ -56,7 +56,6 @@
     text-align: center;
 }
 
-
 .pageTitle {
     color: #FF7600;
     font-size: 3em;
@@ -68,6 +67,11 @@
     margin-bottom: 1em;
     font-size: 1.4em;
     font-weight: 300;
+}
+
+.pageviewCount {
+    display: inline-flex;
+    justify-content: center;
 }
 
 .anchor {
