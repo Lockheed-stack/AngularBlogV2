@@ -11,7 +11,7 @@ import zh from '@angular/common/locales/zh';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgIconsModule } from '@ng-icons/core';
-import {bootstrapEyeFill, bootstrapGithub, bootstrapHeart, bootstrapHeartFill, bootstrapHouse, bootstrapShare, bootstrapTools, bootstrapWechat} from '@ng-icons/bootstrap-icons'
+import {bootstrapCheckCircleFill, bootstrapEyeFill, bootstrapGithub, bootstrapHeart, bootstrapHeartFill, bootstrapHouse, bootstrapShare, bootstrapTools, bootstrapWechat} from '@ng-icons/bootstrap-icons'
 
 // custom components
 import { BlogAdminComponent } from './blog-admin/blog-admin.component';
@@ -113,6 +113,7 @@ registerLocaleData(zh);
       bootstrapTools,
       bootstrapHouse,
       bootstrapEyeFill,
+      bootstrapCheckCircleFill,
     }),
 
     NzLayoutModule,
