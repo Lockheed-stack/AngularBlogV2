@@ -97,7 +97,7 @@ export class BlogIndexComponent implements OnInit, OnDestroy {
               desc: val['desc'],
               img: tmp,
               pv: val['pv'],
-              createdAt: val['Catalog']['CreatedAt'],
+              createdAt: val['CreatedAt'],
               catalogName: val['Catalog']['name']
             }
             this.Last3articleData.push(item);
@@ -130,7 +130,7 @@ export class BlogIndexComponent implements OnInit, OnDestroy {
               desc: val['desc'],
               img: tmp,
               pv: val['pv'],
-              createdAt: val['Catalog']['CreatedAt'],
+              createdAt: val['CreatedAt'],
               catalogName: val['Catalog']['name']
             }
             this.Hot3articleData.push(item);
