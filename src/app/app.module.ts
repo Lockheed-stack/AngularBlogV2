@@ -23,6 +23,7 @@ import { ArticleListComponent } from './blog-admin/article-list/article-list.com
 import { CategoriesComponent } from './blog-admin/categories/categories.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { BlogDisplayComponent } from './blog-display/blog-display.component';
+import {DashboardComponent} from './blog-admin/dashboard/dashboard.component';
 
 // ng zorro
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -82,7 +83,6 @@ import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.co
 import { ToolBarComponent } from './shared/tool-bar/tool-bar.component';
 import { AddCatalogComponent } from './blog-admin/add-catalog/add-catalog.component';
 import { FootComponent } from './shared/foot/foot.component';
-import { BlogDashboardComponent } from './blog-dashboard/blog-dashboard.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
@@ -96,6 +96,7 @@ registerLocaleData(zh);
     AddArticleComponent,
     ArticleListComponent,
     CategoriesComponent,
+    DashboardComponent,
     BlogDisplayComponent,
     SideNavComponent,
     BlogIndexComponent,
@@ -103,7 +104,6 @@ registerLocaleData(zh);
     ToolBarComponent,
     AddCatalogComponent,
     FootComponent,
-    BlogDashboardComponent,
 
   ],
   imports: [
