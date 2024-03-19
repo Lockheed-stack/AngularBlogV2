@@ -8,12 +8,12 @@
             <app-side-nav></app-side-nav>
         </mat-sidenav>
 
-        <mat-sidenav-content class="background">
+        <mat-sidenav-content class="background" id="article-content">
             <div class="wrapper" [style]="mobileQuery.matches?'padding: 15px;max-width: 375px;min-width: 200px;':''">
                 <header>
                     <nz-skeleton [nzActive]="onTitleLoading" [nzLoading]="onTitleLoading">
-                        <h1 class="pageTitle" >{{articleTitle}} </h1>
-                        <h2 class="pageSubTitle" >{{articleDesc}}</h2>
+                        <h1 class="pageTitle">{{articleTitle}} </h1>
+                        <h2 class="pageSubTitle">{{articleDesc}}</h2>
                         <div class="pageviewCount">
                             <h3 style="margin-right: 10px;">阅读量: {{articlePv}}</h3>
                             <mat-icon><ng-icon name="bootstrapEyeFill"></ng-icon></mat-icon>
@@ -34,9 +34,42 @@
 
             </section>
 
-            <div class="anchor" *ngIf="isReady">
-                <app-bookmark [inputArray]="titleArray" [contentLoading]="onContentLoading"></app-bookmark>
+            <div *ngIf="isReady" class="anchor">
+                <div class="bookmarkBox" cdkDrag cdkDragBoundary=".background" (mouseover)="onMouseOver()"
+                    (cdkDragEnded)="onBookMarkDrag($event)">
+                    <button mat-fab color="accent" (click)="onBookMarkClick()"><mat-icon>bookmark</mat-icon></button>
+                </div>
             </div>
+
         </mat-sidenav-content>
     </mat-sidenav-container>
+
+    <p-sidebar [(visible)]="showBookmark" position="right">
+        <ng-template pTemplate="headless">
+            <div class="sidebar-header">
+                <span>
+                    <button mat-icon-button (click)="onBookMarkClick()">
+                        <mat-icon><ng-icon name="bootstrapXCircleFill"></ng-icon></mat-icon>
+                    </button>
+                </span>
+                <span class="sidebar-header-title">目录</span>
+                <span>
+                    <img src="../../assets/imgs/logo3.png" alt="">
+                </span>
+            </div>
+            <p-divider></p-divider>
+            <div class="sider-content">
+                <ul cdkListbox class="example-listbox">
+                    <ng-container *ngFor="let titles of titleArray;index as i">
+                        <dlv [ngSwitch]="titles.level">
+                            <li [cdkOption]="i" *ngSwitchCase="1" class="example-option" (click)="onScroll(titles.TitleId)">{{titles.TitleName}}</li>
+                            <li [cdkOption]="i" *ngSwitchCase="2" style="margin-left:25px;" class="example-option" (click)="onScroll(titles.TitleId)">{{titles.TitleName}}</li>
+                            <li [cdkOption]="i" *ngSwitchCase="3" style="margin-left:45px;" class="example-option" (click)="onScroll(titles.TitleId)">{{titles.TitleName}}</li>
+                        </dlv>
+                    </ng-container>
+                </ul>
+            </div>
+        </ng-template>
+    </p-sidebar>
+
 </div>

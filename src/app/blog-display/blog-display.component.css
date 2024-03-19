@@ -79,6 +79,84 @@
     top: 40%;
     right: 3%;
     bottom: 30%;
-    /* background: rgb(224, 223, 219);
-    overflow-y: auto; */
+    /* overflow-y: auto; */
+}
+
+.bookmarkBox {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-header {
+    display: flex;
+    color: #0051ff;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header-title {
+    font-size: 2em;
+    font-weight: 700;
+    margin: 0;
+    padding: 1em;
+    background: -moz-linear-gradient(to bottom, #534be5 35%, #87267c 100%);
+    background: -webkit-linear-gradient(to bottom, #534be5 35%, #87267c 100%);
+    background: -ms-linear-gradient(to bottom, #534be5 35%, #87267c 100%);
+    background: -o-linear-gradient(to bottom, #534be5 35%, #87267c 100%);
+    background: linear-gradient(to bottom, #534be5 35%, #87267c 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sider-content {
+    overflow-y: scroll;
+}
+
+
+.example-listbox-container {
+    display: block;
+    width: 250px;
+    border: 1px solid black;
+}
+
+.example-listbox-label {
+    display: block;
+    padding: 5px;
+}
+
+.example-listbox {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.example-option {
+    position: relative;
+    padding: 5px 5px 5px 25px;
+    cursor: pointer;
+}
+
+.example-option[aria-selected='true']::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="m9.55 18-5.7-5.7 1.425-1.425L9.55 15.15l9.175-9.175L20.15 7.4Z"/></svg>');
+    /* stylelint-disable-line */
+    background-size: cover;
+    position: absolute;
+    left: 2px;
+}
+
+.example-option:focus {
+    background: rgba(237, 19, 19, 0.2);
+}
+.example-option:hover{
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: font-size 0.5s, font-weight 0.5s;
 }

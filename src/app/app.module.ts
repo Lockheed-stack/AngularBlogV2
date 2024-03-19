@@ -11,7 +11,9 @@ import zh from '@angular/common/locales/zh';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgIconsModule } from '@ng-icons/core';
-import {bootstrapCheckCircleFill, bootstrapEyeFill, bootstrapGithub, bootstrapHeart, bootstrapHeartFill, bootstrapHouse, bootstrapShare, bootstrapTools, bootstrapWechat} from '@ng-icons/bootstrap-icons'
+import {bootstrapCheckCircleFill, bootstrapEyeFill, bootstrapGithub, bootstrapHeart, 
+  bootstrapHeartFill, bootstrapHouse, bootstrapShare, bootstrapTools, 
+  bootstrapWechat,bootstrapXCircleFill,bootstrapJournalBookmarkFill} from '@ng-icons/bootstrap-icons'
 
 // custom components
 import { BlogAdminComponent } from './blog-admin/blog-admin.component';
@@ -64,16 +66,25 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { CdkDrag } from '@angular/cdk/drag-drop';
+import {CdkListboxModule} from '@angular/cdk/listbox';
+
+// prime ng
+import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
+import { ListboxModule } from 'primeng/listbox';
 
 // markdown
-import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { MarkdownModule, MARKED_OPTIONS } from 'ngx-markdown';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
 import { BlogIndexComponent } from './blog-index/blog-index.component';
 import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
 import { ToolBarComponent } from './shared/tool-bar/tool-bar.component';
 import { AddCatalogComponent } from './blog-admin/add-catalog/add-catalog.component';
 import { FootComponent } from './shared/foot/foot.component';
-import { BookmarkComponent } from './blog-display/bookmark/bookmark.component';
+import { BlogDashboardComponent } from './blog-dashboard/blog-dashboard.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 registerLocaleData(zh);
@@ -94,7 +105,7 @@ registerLocaleData(zh);
     ToolBarComponent,
     AddCatalogComponent,
     FootComponent,
-    BookmarkComponent,
+    BlogDashboardComponent,
 
   ],
   imports: [
@@ -114,6 +125,8 @@ registerLocaleData(zh);
       bootstrapHouse,
       bootstrapEyeFill,
       bootstrapCheckCircleFill,
+      bootstrapXCircleFill,
+      bootstrapJournalBookmarkFill
     }),
 
     NzLayoutModule,
@@ -155,12 +168,19 @@ registerLocaleData(zh);
     MatTreeModule,
     MatGridListModule,
     MatTooltipModule,
+    CdkDrag,
+    CdkListboxModule,
+
+    SidebarModule,
+    ButtonModule,
+    DividerModule,
+    ListboxModule,
 
     MarkdownModule.forRoot({
       loader: HttpClient,
       sanitize: SecurityContext.NONE,
       markedOptions: {
-        provide: MarkedOptions,
+        provide: MARKED_OPTIONS,
         useValue: {
           gfm: true,
           breaks: false,
@@ -176,6 +196,7 @@ registerLocaleData(zh);
     { provide: NZ_I18N, useValue: zh_CN },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })

@@ -5,17 +5,13 @@ import { ActivatedRoute } from '@angular/router';
 import hljs from 'highlight.js/lib/common';
 import hljs_dockerfile from 'highlight.js/lib/languages/dockerfile'
 import { MediaMatcher } from '@angular/cdk/layout';
+import { Stack } from './data_structure_stack';
+import { CdkDragEnd, CdkDragStart } from '@angular/cdk/drag-drop';
 
-
-
-interface subTitle {
-  subTitleId: string,
-  subTitleName: string
-}
-interface Title {
+export interface Title {
+  level: number,
   TitleId: string,
   TitleName: string,
-  subTitles: subTitle[]
 }
 
 
@@ -23,7 +19,7 @@ interface Title {
 @Component({
   selector: 'app-blog-display',
   templateUrl: './blog-display.component.html',
-  styleUrls: ['./blog-display.component.css']
+  styleUrls: ['./blog-display.component.css'],
 })
 export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -34,11 +30,8 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
   isReady: boolean = false;
 
   // anchor variable
-  subTitle: {}
   titleArray: Array<Title> = [];
   titleNum: number = 0;
-  previewTitleLevel: number = -1;
-  findSubTitle: boolean = false;
 
   // article variable
   articleId: number = 0;
@@ -46,7 +39,9 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
   articleDesc: string = "";
   articlePv: number = 0;
   articleInfo: article;
-
+  // bookmark
+  showBookmark: boolean = false;
+  isDragBookmark: boolean = false;
 
   // mobile support
   mobileQuery: MediaQueryList;
@@ -59,7 +54,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher
   ) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 400px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener("change", this._mobileQueryListener);
   }
@@ -72,11 +67,8 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onTitleLoading = true;
     this.isReady = false;
 
-    this.subTitle = {};
     this.titleArray = [];
     this.titleNum = 0;
-    this.previewTitleLevel = -1;
-    this.findSubTitle = false;
   }
   onReady() {
     this.ngAfterViewInit()
@@ -87,38 +79,17 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   renderHeading() {
+    const stack = new Stack<Title>();
     this.markdownService.renderer.heading = (text: string, level: number) => {
       this.titleNum++;
-      if ((this.previewTitleLevel >= level || this.previewTitleLevel === -1) && !this.findSubTitle) { // h1>h2>..>h6
-        const title: Title = {
-          TitleId: "title".concat(String(this.titleNum)),
-          TitleName: text,
-          subTitles: []
-        }
-        this.titleArray.push(title)
-      } else {
-        if (level < this.previewTitleLevel) {
-          this.findSubTitle = false;
-          const title: Title = {
-            TitleId: "title".concat(String(this.titleNum)),
-            TitleName: text,
-            subTitles: []
-          }
-          this.titleArray.push(title)
-        }
-        else {
-          this.findSubTitle = true;
-          const subtitle: subTitle = {
-            subTitleId: "title".concat(String(this.titleNum)),
-            subTitleName: text
-          }
-          const loc: number = this.titleArray.length <= 0 ? 0 : (this.titleArray.length - 1)
-          this.titleArray[loc].subTitles.push(subtitle);
-        }
-      }
-      this.previewTitleLevel = level;
 
-      // const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+      const title: Title = {
+        level: level,
+        TitleId: "title".concat(String(this.titleNum)),
+        TitleName: text,
+      }
+      this.titleArray.push(title);
+
       return '<h' + level + ' id="' + text + '">' +
         '<a id="title' + (this.titleNum) + '" #title' + (this.titleNum) + '>' +
         '</a>' + text +
@@ -132,8 +103,21 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   // -------------------- markdown process --------------------------
 
-
-
+  // ---------------------- bookmark --------------------------------
+  onMouseOver(){
+    this.isDragBookmark = false;
+  }
+  onBookMarkDrag(event: CdkDragEnd): void {
+    if (Math.abs(event.distance.x) > 10 || Math.abs(event.distance.y) > 10) {
+      this.isDragBookmark = true;
+    }
+  }
+  onBookMarkClick() {
+    if (!this.isDragBookmark) {
+      this.showBookmark = !this.showBookmark;
+    }
+  }
+  // ---------------------- bookmark --------------------------------
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.isReady = true;
@@ -176,6 +160,7 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
                   var url: string = value.data["content"];
                   if (url.startsWith("http://", 0)) {
                     url = url.substring(7,);
+                    url = "https://" + url;
                   }
                   this.articleService.getSingleArticleContent(url).subscribe({
                     next: (content) => {
@@ -204,10 +189,10 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
         )
       }
     })
-
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener("change", this._mobileQueryListener);
   }
+
 }
