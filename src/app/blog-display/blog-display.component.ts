@@ -5,8 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import hljs from 'highlight.js/lib/common';
 import hljs_dockerfile from 'highlight.js/lib/languages/dockerfile'
 import { MediaMatcher } from '@angular/cdk/layout';
-import { Stack } from './data_structure_stack';
-import { CdkDragEnd, CdkDragStart } from '@angular/cdk/drag-drop';
+import { CdkDragEnd,} from '@angular/cdk/drag-drop';
 
 export interface Title {
   level: number,
@@ -79,7 +78,6 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   renderHeading() {
-    const stack = new Stack<Title>();
     this.markdownService.renderer.heading = (text: string, level: number) => {
       this.titleNum++;
 
@@ -160,7 +158,6 @@ export class BlogDisplayComponent implements OnInit, AfterViewInit, OnDestroy {
                   var url: string = value.data["content"];
                   if (url.startsWith("http://", 0)) {
                     url = url.substring(7,);
-                    url = "https://" + url;
                   }
                   this.articleService.getSingleArticleContent(url).subscribe({
                     next: (content) => {

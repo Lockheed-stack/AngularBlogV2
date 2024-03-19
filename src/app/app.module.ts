@@ -21,7 +21,6 @@ import { LoginComponent } from './login/login.component';
 import { AddArticleComponent } from './blog-admin/add-article/add-article.component';
 import { ArticleListComponent } from './blog-admin/article-list/article-list.component';
 import { CategoriesComponent } from './blog-admin/categories/categories.component';
-import { DashboardComponent } from './blog-admin/dashboard/dashboard.component';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { BlogDisplayComponent } from './blog-display/blog-display.component';
 
@@ -97,7 +96,6 @@ registerLocaleData(zh);
     AddArticleComponent,
     ArticleListComponent,
     CategoriesComponent,
-    DashboardComponent,
     BlogDisplayComponent,
     SideNavComponent,
     BlogIndexComponent,
