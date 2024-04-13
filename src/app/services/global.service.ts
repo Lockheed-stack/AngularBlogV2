@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-  public domain: string = "https://leelennin.top/";
+  public domain: string = "https://lee-marcus.one/";
   public qiniuImgsURL: string = this.domain + "qiniu-img/";
   public qiniuArticleURL: string = this.domain + "qiniu-article/";
   constructor() { }
